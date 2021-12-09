@@ -13,13 +13,18 @@ const images = [
   },
 ];
 
-const ulEl = document.querySelector('.gallery');
+const galleryEl = document.querySelector('.gallery');
 
-images.forEach(el => {
-  ulEl.insertAdjacentHTML(
-    'afterbegin',
-    `<li><img src = "${el.url}" alt = "${el.alt}"  width = "150" height = "100" /></li>`,
-  );
-});
+const makeImageEl = images
+  .map(
+    image => `<li class="gallery__item">
+    <img class="gallery__img" src="${image.url}" alt="${image.alt}" width="250" height="150">
+   </li>`,
+  )
+  .join('');
 
-// console.log(ulEl);
+galleryEl.style.display = 'flex';
+galleryEl.style.justifyContent = 'space-around';
+galleryEl.style.listStyle = 'none';
+
+galleryEl.insertAdjacentHTML('beforeend', makeImageEl);
